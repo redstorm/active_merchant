@@ -18,7 +18,7 @@ module ActiveMerchant #:nodoc:
           ]
 
           def generate_signature_string
-            PAYMENT_RESULT_SIGNATURE_FIELDS.map {|key| @fields[key.to_s]} * ""
+            ::ActiveMerchant::Billing::Integrations::Adyen::Return::PAYMENT_RESULT_SIGNATURE_FIELDS.map {|key| @params[key.to_s]} * ""
           end
 
           def generate_signature
@@ -27,24 +27,13 @@ module ActiveMerchant #:nodoc:
           end
           
           def signature_is_valid?
-            puts "*"*100
-            puts "checking signature...."
-            puts "is #{generate_signature} == #{params['merchantSig']} ?"
-            puts "*"*100
-            generate_signature == params['merchantSig']
+            generate_signature.to_s == params['merchantSig'].to_s
           end
 
           def payment_authorized?
             params['authResult'] == 'AUTHORISED'
           end
   
-#http://localhost:3000/done?merchantReference=1234
-#skinCode=fVmBwBe3
-#shopperLocale=en_GB
-#paymentMethod=visa
-#authResult=REFUSED
-#pspReference=8712536768221232
-#merchantSig=SMbs3j04uaxncsQl3SqXmzp4IbQ%3D
           def success?
             signature_is_valid? and payment_authorized?
           end
