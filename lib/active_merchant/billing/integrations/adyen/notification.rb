@@ -6,42 +6,42 @@ module ActiveMerchant #:nodoc:
       module Adyen
         class Notification < ActiveMerchant::Billing::Integrations::Notification
           def complete?
-            params['']
+            params['success'] == true
           end 
 
           def item_id
-            params['']
+            params['merchantReference']
           end
 
           def transaction_id
-            params['']
+            params['pspReference']
           end
 
           # When was this payment received by the client. 
           def received_at
-            params['']
+            params['eventDate']
           end
 
           def payer_email
-            params['']
+            ''#params['']
           end
          
           def receiver_email
-            params['']
+            ''#params['']
           end 
 
           def security_key
-            params['']
+            ''#params['']
           end
 
           # the money amount we received in X.2 decimal.
           def gross
-            params['']
+            params['value']
           end
 
           # Was this a test transaction?
           def test?
-            params[''] == 'test'
+            params['live'] == 'false'
           end
 
           def status
@@ -63,25 +63,6 @@ module ActiveMerchant #:nodoc:
           #       ... log possible hacking attempt ...
           #     end
           def acknowledge      
-            payload = raw
-
-            uri = URI.parse(Adyen.notification_confirmation_url)
-
-            request = Net::HTTP::Post.new(uri.path)
-
-            request['Content-Length'] = "#{payload.size}"
-            request['User-Agent'] = "Active Merchant -- http://home.leetsoft.com/am"
-            request['Content-Type'] = "application/x-www-form-urlencoded" 
-
-            http = Net::HTTP.new(uri.host, uri.port)
-            http.verify_mode    = OpenSSL::SSL::VERIFY_NONE unless @ssl_strict
-            http.use_ssl        = true
-
-            response = http.request(request, payload)
-
-            # Replace with the appropriate codes
-            raise StandardError.new("Faulty Adyen result: #{response.body}") unless ["AUTHORISED", "DECLINED"].include?(response.body)
-            response.body == "AUTHORISED"
           end
  private
 
@@ -90,7 +71,7 @@ module ActiveMerchant #:nodoc:
             @raw = post
             for line in post.split('&')
               key, value = *line.scan( %r{^(\w+)\=(.*)$} ).flatten
-              params[key] = value
+              @params[key] = value
             end
           end
         end
