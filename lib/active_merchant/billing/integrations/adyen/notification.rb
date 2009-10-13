@@ -6,8 +6,13 @@ module ActiveMerchant #:nodoc:
       module Adyen
         class Notification < ActiveMerchant::Billing::Integrations::Notification
           def complete?
-            params['success'] == true
+            params['eventCode'] == 'AUTHORISATION'
+            params['success'] == 'true'
           end 
+
+          def event_code
+            params['eventCode']
+          end
 
           def item_id
             params['merchantReference']
@@ -63,6 +68,8 @@ module ActiveMerchant #:nodoc:
           #       ... log possible hacking attempt ...
           #     end
           def acknowledge      
+            # this is a stub because Adyen does not support this feature, as of 2009-10-12
+            true
           end
  private
 
