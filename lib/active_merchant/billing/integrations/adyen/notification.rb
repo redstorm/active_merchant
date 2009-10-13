@@ -6,8 +6,7 @@ module ActiveMerchant #:nodoc:
       module Adyen
         class Notification < ActiveMerchant::Billing::Integrations::Notification
           def complete?
-            params['eventCode'] == 'AUTHORISATION'
-            params['success'] == 'true'
+            ((params['eventCode'] == 'AUTHORISATION') and (params['success'] == 'true'))
           end 
 
           def event_code
