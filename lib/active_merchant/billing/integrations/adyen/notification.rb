@@ -49,7 +49,11 @@ module ActiveMerchant #:nodoc:
           end
 
           def status
-            params['']
+            params['success']
+          end
+
+          def currency
+            params['currency']
           end
 
           # Acknowledge the transaction to Adyen. This method has to be called after a new 

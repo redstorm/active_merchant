@@ -32,20 +32,4 @@ class AdyenHelperTest < Test::Unit::TestCase
     assert_field 'billingAddress.postalCode',      'LS2 7EE'
   end
   
-  #def test_unknown_address_mapping
-  #  @helper.billing_address :farm => 'CA'
-  #  assert_equal 3, @helper.fields.size
-  #end
-
-  #def test_unknown_mapping
-  #  assert_nothing_raised do
-  #    @helper.company_address :address => '500 Dwemthy Fox Road'
-  #  end
-  #end
-  #
-  #def test_setting_invalid_address_field
-  #  fields = @helper.fields.dup
-  #  @helper.billing_address :street => 'My Street'
-  #  assert_equal fields, @helper.fields
-  #end
 end

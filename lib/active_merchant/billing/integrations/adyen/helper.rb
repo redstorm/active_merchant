@@ -32,15 +32,6 @@ module ActiveMerchant #:nodoc:
             add_field('shopperLocale',   'en_GB')
             add_field('orderData',       'orderData')
             add_field('sessionValidity', "#{ (Date.today + 10).to_s }T11:00:00Z" )
-            #@billing_address = options.delete(:billing_address)
-            #if @billing_address
-            #  add_field('billingAddress.street',            '')
-            #  add_field('billingAddress.houseNumberOrName', '')
-            #  add_field('billingAddress.city',              '')
-            #  add_field('billingAddress.postalCode',        '')
-            #  add_field('billingAddress.stateOrProvince',   '')
-            #  add_field('billingAddress.country',           '')
-            #end
           end
 
           # orderData is a string of HTML which is displayed along with the CC form
@@ -104,7 +95,6 @@ module ActiveMerchant #:nodoc:
           mapping :tax, ''
           mapping :shipping, ''
 
-          #mapping :shared_secret, 'shared_secret'
         end
       end
     end
