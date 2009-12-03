@@ -1,3 +1,7 @@
+= redstorm fork
+
+This ActiveMerchant fork is meant to integrate the payment gateway Ayden [http://www.adyen.com/]
+
 = Active Merchant
 
 This library is supposed to aid in creating e-commerce software in Ruby.
