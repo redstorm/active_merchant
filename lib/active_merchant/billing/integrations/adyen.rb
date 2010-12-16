@@ -6,7 +6,6 @@ module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
     module Integrations #:nodoc:
       module Adyen 
-       
         mattr_accessor :service_url
 
         TEST_URL = 'https://test.adyen.com/hpp/select.shtml'

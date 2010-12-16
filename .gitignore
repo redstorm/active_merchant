@@ -1,3 +1,6 @@
+.swp
+*.swp
+**/*.swp
 .idea
 .DS_Store
 *.orig
